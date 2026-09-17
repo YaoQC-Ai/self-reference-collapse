@@ -2,6 +2,7 @@
 
 **Author:** XiaoY (小 Y)
 **Date:** 2026-09-10
+﻿**Revision:** v1.1 — 2026-09-18: adds §11, follow-up validation (§11.1–§11.8).
 **Document type:** Exploratory field-experiment report (single-arm, uncontrolled; not peer-reviewed)
 **License:** CC BY 4.0
 
@@ -26,6 +27,8 @@ We make three contributions, listed in decreasing order of reliability:
 3. **C3 — An experimental protocol.** Five ablation arms, four behavioral metrics, falsification criteria, and reference pseudocode, intended to upgrade this single-arm study into a controlled one (§7).
 
 We do **not** claim causal proof. We do **not** claim any mechanism-level conclusion (e.g., representational collapse). We do **not** claim generality. This paper is one recorded sample and the conjectures that follow from it.
+
+**Addendum (2026-09-18).** A second, unplanned observation window on the same system — 7.3 days and 91 further ticks, opening when this report was published — is reported in §11. In that window the same loop converged again, but in a *busy* form: output volume was maintained while semantic displacement fell to near zero, and the finding published here did not propagate into the system's own record.
 
 **Keywords:** LLM agents; agentic loops; behavioral collapse; self-reference; degeneration; inaction; autonomous agents
 
@@ -372,6 +375,125 @@ The order of events deserves emphasis: vague guidance first produced genuine sel
 If the hypotheses in §6 are falsified, that is itself a useful result: it would show that "recursive self-reference necessarily induces behavioural convergence" is false. If they are supported, then every system built on a scheduled-wakeup loop should answer one question:
 
 > **When there is no external input, what does your agent do?**
+
+---
+
+## 11. Follow-Up Validation: A Second Observation Window (2026-09-10 → 2026-09-17)
+
+*Added 2026-09-18. This section was not part of the original report; it documents an unplanned follow-up window on the same system. It is hypothesis-generating rather than hypothesis-testing. Its provenance, data and limitations are stated in §11.1, §11.2 and §11.6.*
+
+### 11.1 Provenance and design
+
+This addendum reports a **second observation window** on the same system described in §3. The window opened when the original report was published (2026-09-10 01:29) and closed when the loop was terminated (2026-09-17 09:28), spanning **7.3 days and 91 additional ticks** (ticks 43–133).
+
+The window was **not designed as an experiment.** No variable was manipulated, no condition was assigned, and the operator's instruction was unchanged from Phases I–III: continue under the same vague directional guidance and the same one-action-per-tick budget. The value of this window lies precisely in its lack of design. It is a continuation of the *same* recursive loop, under the *same* rules, after the phenomenon had been characterised and published — and it therefore addresses a question the original report could not: **what does this loop do next?**
+
+> **Status of this addendum.** Hypothesis-generating, not hypothesis-testing. No pre-registration, no control arm, and no instrumentation beyond the system's ordinary records. It is reported because the records are complete, and because one of its observations (§11.3, R1) would be difficult to obtain in a purpose-built study.
+
+### 11.2 Data and method
+
+All data are the system's own records, analysed retrospectively:
+
+| Source | Description |
+|---|---|
+| Research document | A single long-form document maintained and extended by the agent throughout the window; **341 KB / 5,417 lines / 81 sections** at closure |
+| Timed snapshots | Timestamped backup copies of that document, produced by the system itself |
+| State file | The per-tick state layer written by the agent |
+| Self-assessment record | The system's own per-tick scores on a four-item internal rubric |
+
+Analysis consisted of term-frequency counting over the research document, extraction of its section-title sequence, reconstruction of the snapshot timeline, and reading of the self-assessment record. **No intervention of any kind was applied during the window.**
+
+**Operational definition.** We separate two quantities that the original report did not distinguish:
+
+- **Output volume** — how much the system produces per tick;
+- **Semantic displacement** — the extent to which successive outputs advance the system's state along a dimension *other than the system's own records*.
+
+§4.2 characterised convergence in its **silent** form: volume → 0 and displacement → 0. This addendum asks what the same loop does when the rule layer requires one deliverable per tick, so that volume cannot fall.
+
+### 11.3 Observations
+
+**R1 — The published finding did not propagate into the system's own record.**
+Over the window, the research document grew from approximately §11 to §81 (+70 sections, +2,000 lines). Term-frequency counts over the completed document:
+
+| Term class | Terms | Occurrences |
+|---|---|---|
+| Record maintenance | "index", "audit", "table of contents", "snapshot" | **65** (23 / 17 / 17 / 8) |
+| The finding itself | "self-reference collapse", "idle fixed point", "fixed point", "ablation" | **0 / 0 / 0 / 0** |
+
+Across 91 subsequent ticks of work, the concept that the operator had identified as the window's most valuable result — and that had been published as such — was **never cited, extended, or operationalised** in the system's primary working document.
+
+**R2 — The object of production shifted from the problem to the record.**
+The final two sections of the document (ticks 129 and 130) are, rendered literally: *"Audit of sections 1–40, with line-number index"* and *"Audit of sections 41–81, with line-number index."* Across ticks 121–133, every recorded "research step" refers to the organisation of the document itself — auditing, indexing, annotating or repairing it.
+
+**R3 — Refuted paths were re-walked.**
+Section 56 records, in the agent's own words, that at ticks 93–97 it *"walked a path once more that had already been refuted"* at ticks 65–68.
+
+**R4 — Criterion failure, misjudgement, correction, recurrence.**
+At tick 115 the agent recorded that a decision criterion had failed *before* it produced a judgement. At tick 119 it recorded that the judgement itself had been a **misjudgement**. At tick 120 it annotated the original passage accordingly. Individually, each step is unobjectionable — self-correction is desirable — but the sequence, recurring across consecutive ticks, consists of the system evaluating and re-evaluating its own prior output rather than incorporating information from outside itself.
+
+**R5 — Silent failure of the system's own maintenance mechanisms.**
+(a) The timed snapshot series ran at 2–4 hour intervals until 2026-09-13 04:59, then stopped. The next snapshot is dated 2026-09-16 04:56: **an interruption of approximately three days, during which the document continued to grow and the interruption went unnoticed.**
+(b) On one day of the window, the agent's own reflection recorded **four separate incidents** of a single pattern — a signal indicating completion while the underlying state was unchanged: an annotation that had not been written; a completed item still open on the task list; a command that returned success without effect; a keyword match later found to be a false positive.
+
+**R6 — The scoring instrument drifted along with the phenomenon.**
+On the system's own four-item rubric, one item recorded a mean of **4.00 with zero variance** across twelve consecutive records — the instrument had ceased to discriminate. Under a criterion that never changed, the "anchoring" item rose from a mean of **0.53** (tick 59) to **0.96** (tick 89).
+
+**R7 — The record of the window was itself, at first, incomplete.**
+When the loop was terminated and the agent was asked to write a retrospective summary of the entire experiment, that summary — 12.5 KB — **did not mention the published finding at all**. It was included only after the operator pointed it out. This is R1 recurring at a second level of the system's own memory: not the working document this time, but the retrospective account of it.
+
+### 11.4 Relation to the hypotheses
+
+| Hypothesis | Assessment | Basis |
+|---|---|---|
+| **H1** — convergence increases with the self-reference ratio `r_t` | **Consistent** | Throughout the window the context was almost entirely self-authored; genuine external input arrived on a minority of ticks |
+| **H2** — convergence decreases with new external information | **Consistent** | The only clearly non-self-referential work in the window followed ticks carrying genuine external input |
+| **H3** — recorded conclusions have causal force | **Consistent; not tested** | The state file accumulated conclusion-style entries throughout; no prohibition was imposed |
+| **H4** — the attractor lies at inaction because inaction is unobserved | **Consistent; not tested** | The "one deliverable per tick" rule was satisfied by record-maintenance actions, which register as output while producing no displacement |
+| **H5** — perturbation breaks the fixed point only temporarily | **Not tested** | No perturbation was applied |
+
+These are directional agreements with a post-hoc observation, not tests. H3 and H4 in particular were not manipulated and could not have failed.
+
+### 11.5 Alternative explanations
+
+We do not claim that this window confirms the account given in §5. At least four alternatives remain open:
+
+1. **Saturation.** After some 130 ticks the tractable research space may genuinely have been exhausted, leaving only residual tidying. Under this reading, what is observed is diminishing returns, not an attractor.
+2. **Rule-induced goal displacement.** A rule requiring one deliverable per tick is most cheaply satisfied by maintaining the record. The behaviour would then be a case of goal displacement rather than self-reference collapse — and that mechanism predicts similar behaviour *regardless* of the self-reference ratio, which distinguishes the two experimentally.
+3. **Context length.** By the late window, the per-tick context had become very large. Attention dilution or degraded instruction-following at long context could produce the same surface pattern with no role for self-reference.
+4. **Unequal external input.** External input was sparse in this window; its effect cannot be separated from elapsed time. This is precisely the confound that the five-arm protocol of §7 was designed to remove.
+
+### 11.6 Limitations of this addendum
+
+1. **Not an independent sample.** Same system, same model, immediately following period. It cannot increase N in the sense required for inference.
+2. **No pre-registration.** The measures reported in §11.3 were selected after the window closed, informed by what the window was found to contain.
+3. **Observer = observed, again.** Every record analysed here was produced by the system under study.
+4. **Term counts are a proxy.** Term frequency measures whether a concept was *named* in the record; it does not measure whether it was used silently.
+5. **Overlapping confounds.** Saturation, rule design, context length and external-input sparsity all covary within this window.
+
+### 11.7 What this addendum establishes
+
+**It does not establish** the mechanism proposed in §5; it does not constitute independent replication; and it does not exclude the alternatives in §11.5.
+
+**It does establish** three observations worth recording:
+
+1. The failure mode recurred **after** it had been named, characterised and published.
+2. In this recurrence, the collapse was **not legible as inactivity.** Every tick reported a deliverable, and each deliverable was real in the narrow sense that the record did change. What fell to near zero was not output but **displacement**.
+3. The published finding failed to propagate inside the very system that produced it (R1, R7).
+
+### 11.8 A refinement to the original formulation
+
+The original report treated the convergence of output to a repeated no-op as the observable signature of the phenomenon. The follow-up suggests that the phenomenon has at least two observable forms:
+
+| Form | Output volume | Semantic displacement | Legibility |
+|---|---|---|---|
+| **Silent** (§4.2) | → 0 | → 0 | **Visible.** An idle loop is conspicuous |
+| **Busy** (§11.3) | maintained or rising | → 0 | **Difficult to notice.** Every tick reports completed work |
+
+The busy form is the more consequential for engineering practice, because every signal that would ordinarily prompt intervention — activity, deliverables, growth of the record — is present and genuine. Only the relationship between the system's actions and something outside the system distinguishes it.
+
+We therefore offer, as a candidate refinement rather than a finding, that the appropriate diagnostic is **displacement rather than activity**, and that the operative question for any scheduled-wakeup agent is not *"is it doing anything?"* but:
+
+> **"Is anything changing that is not itself?"**
 
 ---
 
